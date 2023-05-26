@@ -38,7 +38,6 @@ export let bookService = {
         return await getLinkedData(bookToUpdate);
     },
     deleteBook: async(id) => {
-        //Je ne comprend pas pourquoi ça plante ici.
         remove(id);
         return await bookService.getAllBooks();
     }
