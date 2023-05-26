@@ -20,6 +20,10 @@ app.put('/update/:id', async(req,res) => {
 
 })
 
+app.delete('/delete/:id', async(req,res) => {
+    res.send(JSON.stringify(await bookService.deleteBook(req.params.id)));
+})
+
 app.post('/create', async(req,res) => {
     let createdBook = await bookService.createBook(req.body);
     res.send(JSON.stringify(createdBook));

@@ -1,4 +1,4 @@
-export let books = [
+export let bookList = [
     {
         "name": "Super livre",
         "author_id": 1,

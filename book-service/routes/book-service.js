@@ -1,29 +1,29 @@
-import { books } from '../books.js'
+import { bookList } from '../books.js'
 import { getLinkedData,getMultipleLinkedData } from '../utils.js';
 
-export const bookService = {
+export let bookService = {
     getBooksById: async (id) => {
-        let foundBook =  books.find((entry) => {
+        let foundBook =  bookList.find((entry) => {
             return entry.id == id;
         })
         return await getLinkedData(foundBook);
     },
     getAllBooks: async () => {
-        return await getMultipleLinkedData(books); 
+        return await getMultipleLinkedData(bookList); 
     },
     createBook: async({name, author_id, category_id}) => {
-        let id_max = books.length+1;
+        let id_max = bookList.length+1;
         let newBook = {
             name,
             author_id,
             category_id,
             id: id_max
         }
-        books.push(newBook);
+        bookList.push(newBook);
         return await getLinkedData(newBook);
     },
     updateBooks: async({name, author_id, category_id,id}) => {
-        let bookToUpdate = books.find((entry) => {
+        let bookToUpdate = bookList.find((entry) => {
             return entry.id == id;
         });
         if(name){
@@ -36,5 +36,12 @@ export const bookService = {
             bookToUpdate.category_id = category_id;
         }
         return await getLinkedData(bookToUpdate);
+    },
+    deleteBook: async(id) => {
+        //Je ne comprend pas pourquoi ça plante ici.
+        bookList = bookList.filter((entry) => {
+            return entry.id != id;
+        });
+        return await bookService.getAllBooks();
     }
 }

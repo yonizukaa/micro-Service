@@ -1,4 +1,4 @@
-const fetchIds = async(url,ids) => {
+let fetchIds = async(url,ids) => {
     let response =  await fetch(url, {
         method: 'POST',
         headers: {
@@ -10,24 +10,24 @@ const fetchIds = async(url,ids) => {
     return await response.json();
 }
 
-const formatByField = (data,field) => {
+let formatByField = (data,field) => {
     return data.reduce((prev,cur) => {
         prev[cur[field]] = cur;
         return prev;
     },{})
 }
 
-export const getLinkedData = async (books) => {
-    const responseAuthor = await fetch(`http://localhost:4500/get/${books.author_id}`);
-    const dataAuthor = await responseAuthor.json();
-    const responseCategory = await fetch(`http://localhost:4600/get/${books.category_id}`);
-    const dataCategory = await responseCategory.json();
+export let getLinkedData = async (books) => {
+    let responseAuthor = await fetch(`http://localhost:4500/get/${books.author_id}`);
+    let dataAuthor = await responseAuthor.json();
+    let responseCategory = await fetch(`http://localhost:4600/get/${books.category_id}`);
+    let dataCategory = await responseCategory.json();
     books.category = dataCategory;
     books.author= dataAuthor;
     return books;
 }
 
-export const getMultipleLinkedData = async (books) => {
+export let getMultipleLinkedData = async (books) => {
     let idsAuthors = books.map((book) => {
         return book.author_id;
     })

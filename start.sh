@@ -1,7 +1,7 @@
 #!/bin/bash
 
-node ./category-service/index.js &
+nodemon ./category-service/index.js &
 
-node ./book-service/index.js &
+nodemon ./book-service/index.js &
 
-node ./author-service/index.js &
+nodemon ./author-service/index.js &
