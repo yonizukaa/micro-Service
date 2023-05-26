@@ -12,3 +12,9 @@ export let bookList = [
         "id": 2
     }
 ]
+
+export let remove = (id) => {
+    bookList = bookList.filter((entry) => {
+        return entry.id != id;
+    })
+}

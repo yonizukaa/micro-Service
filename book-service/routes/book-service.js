@@ -1,4 +1,4 @@
-import { bookList } from '../books.js'
+import { bookList,remove } from '../books.js'
 import { getLinkedData,getMultipleLinkedData } from '../utils.js';
 
 export let bookService = {
@@ -39,9 +39,7 @@ export let bookService = {
     },
     deleteBook: async(id) => {
         //Je ne comprend pas pourquoi ça plante ici.
-        bookList = bookList.filter((entry) => {
-            return entry.id != id;
-        });
+        remove(id);
         return await bookService.getAllBooks();
     }
 }
