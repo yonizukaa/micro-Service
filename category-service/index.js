@@ -7,15 +7,15 @@ const port = 4600
 
 app.use(express.json());
 
-app.get('/get', async (req,res) => {
+app.get('/category/get', async (req,res) => {
     res.send(JSON.stringify(categoryService.getAllCategory()));
 })
 
-app.get('/get/:id', async (req,res) => {
+app.get('/category/get/:id', async (req,res) => {
     res.send(JSON.stringify(categoryService.getCategoryById(req.params.id)));
 })
 
-app.post('/get/multiple',async (req,res) => {
+app.post('/category/get/multiple',async (req,res) => {
     res.send(JSON.stringify(categoryService.getCategoryByIds(req.body)));
 })
 

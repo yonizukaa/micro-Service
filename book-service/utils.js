@@ -18,9 +18,9 @@ let formatByField = (data,field) => {
 }
 
 export let getLinkedData = async (books) => {
-    let responseAuthor = await fetch(`http://localhost:4500/get/${books.author_id}`);
+    let responseAuthor = await fetch(`http://author_service:4500/author/get/${books.author_id}`);
     let dataAuthor = await responseAuthor.json();
-    let responseCategory = await fetch(`http://localhost:4600/get/${books.category_id}`);
+    let responseCategory = await fetch(`http://category_service:4600/category/get/${books.category_id}`);
     let dataCategory = await responseCategory.json();
     books.category = dataCategory;
     books.author= dataAuthor;
@@ -34,9 +34,9 @@ export let getMultipleLinkedData = async (books) => {
     let idsCategory = books.map((book) => {
         return book.category_id
     })
-    let authors = await fetchIds('http://localhost:4500/get/multiple',idsAuthors);
+    let authors = await fetchIds('http://author_service:4500/author/get/multiple',idsAuthors);
     authors = formatByField(authors,"id");
-    let categories = await fetchIds('http://localhost:4600/get/multiple',idsCategory);
+    let categories = await fetchIds('http://category_service:4600/category/get/multiple',idsCategory);
     categories = formatByField(categories,"id");
     return books.map((book) => {
         book.category = categories[book.category_id];
