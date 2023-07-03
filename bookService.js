@@ -1,5 +1,6 @@
 // bookService.js
 import { books } from "./book.js";
+import { eventBus } from "./EventBus.js";
 
 export const bookService = {
   getAllBooks: () => {
@@ -18,6 +19,8 @@ export const bookService = {
       categoryId
     };
     books.push(newBook);
+
+    eventBus.publish("bookCreated", newBook);
     return newBook;
   },
 
@@ -27,6 +30,9 @@ export const bookService = {
       book.title = title;
       book.authorId = authorId;
       book.categoryId = categoryId;
+
+      eventBus.publish("bookUpdated", book);
+
       return book;
     }
     return null;
@@ -36,6 +42,9 @@ export const bookService = {
     const index = books.findIndex((book) => book.id === id);
     if (index !== -1) {
       books.splice(index, 1);
+
+      eventBus.publish("bookDeleted", deletedBook);
+
       return true;
     }
     return false;

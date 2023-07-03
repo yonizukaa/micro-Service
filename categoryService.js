@@ -1,5 +1,7 @@
 // categoryService.js
 import { categories } from "./category.js";
+import { eventBus } from "./EventBus.js";
+
 
 export const categoryService = {
   getAllCategories: () => {
@@ -16,6 +18,7 @@ export const categoryService = {
       name
     };
     categories.push(newCategory);
+    eventBus.publish("categoryCreated", newCategory);
     return newCategory;
   },
 
@@ -23,6 +26,8 @@ export const categoryService = {
     const category = categories.find((category) => category.id === id);
     if (category) {
       category.name = name;
+
+      eventBus.publish("categoryUpdated", category);
       return category;
     }
     return null;
@@ -32,6 +37,9 @@ export const categoryService = {
     const index = categories.findIndex((category) => category.id === id);
     if (index !== -1) {
       categories.splice(index, 1);
+
+
+      eventBus.publish("categoryDeleted", deletedCategory);
       return true;
     }
     return false;
