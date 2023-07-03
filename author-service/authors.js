@@ -1,12 +1,12 @@
 export let authors = [
     {
-        "name": "Simon",
-        "email": "sbredeche@outlook.fr",
+        "name": "jk rowling",
+        "email": "jkroro@.fr",
         "id": 1
     },
     {
-        "name": "Arnaud",
-        "email": "sbredeche@outlook.fr",
+        "name": "toto",
+        "email": "totototototo@outlook.fr",
         "id": 2
     }
 ]
